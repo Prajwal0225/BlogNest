@@ -8,7 +8,7 @@ export default function Dashboard(){
         <>
         <Navbar/>
         <Searchbox/>
-        <Blogsdivide/>
+        <Blogsdivide focus="allblogs"/>
         <div className="md:grid md:grid-cols-2 lg:grid-cols-4 md:ml-10 md:mr-10 lg:ml-20 lg:mr-20">
             <Blogcard/>
             <Blogcard/>

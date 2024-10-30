@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Formbox from "../components/Formbox";
-import FormHeading from "../components/Formheading";
-import InputField from "../components/InputField";
-import Formbutton from "../components/Formbutton";
-import Formbottom from "../components/Formbottom";
+import Formbox from "../components/Forms/Formbox";
+import FormHeading from "../components/Forms/Formheading";
+import InputField from "../components/Forms/InputField";
+import Formbutton from "../components/Forms/Formbutton";
+import Formbottom from "../components/Forms/Formbottom";
 
 export default function SigninForm(){
     const [file,setFile]:any = useState();
