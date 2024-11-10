@@ -2,13 +2,29 @@ import Navbar from "../components/Navbar";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from 'react-router-dom';
-import Commetns from "../components/Comments";
+import Comments from "../components/Comments";
+
+// Define the interface for the blog post
+interface BlogPost {
+  id: number;
+  title: string;
+  blogimg: string;
+  description: string;
+}
+
+// Define the interface for the user
+interface User {
+  id: number;
+  username: string;
+  profileimg: string;
+}
 
 
 export default function Blog(){
   const {id} = useParams();
-  const[blogpost,setBlogPost] = useState();
-  const[user,setUser]= useState();
+const [blogpost, setBlogPost] = useState<BlogPost | null>(null);
+const [user, setUser] = useState<User | null>(null);
+
   
     useEffect(()=>{
          const getData = async() =>{
@@ -43,29 +59,18 @@ export default function Blog(){
       </div>
      
                 <hr/>
-                <Commetns
-                image={user?.profileimg}
-                blogpostId = {blogpost?.id}
-                userId = {user?.id}
-                />
-      {/* <WriteCommet
-      image={user?.profileimg}
-      blogpostId = {blogpost?.id}
-      userId = {user?.id}
-      />
-
-      <ViewComments
-          id= {blogpost?.id}
-      /> */}
+                {blogpost && user && blogpost.id && user.id && user.profileimg && (
+          <Comments
+            image={user.profileimg!}  
+            blogpostId={blogpost.id!}  
+            userId={user.id!}  
+          />
+        )}
+     
       
 
       </div>
-
-
-
-      
-
-
 </>
     )
 }
+

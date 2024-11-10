@@ -1,5 +1,15 @@
+//@ts-ignore
 import axios from "axios";
 import { useEffect, useState } from "react";
+
+interface Comment {
+    id: number;
+    comment: string;
+    user: {
+        username: string;
+        profileimg: string;
+    };
+}
 
 interface CommentsSectionInterface {
     image: string;
@@ -7,8 +17,8 @@ interface CommentsSectionInterface {
     userId: number;
 }
 
-export default function Commetns({ image, blogpostId, userId }: CommentsSectionInterface) {
-    const [comments, setComments] = useState([]); 
+export default function Comments({ image, blogpostId, userId }: CommentsSectionInterface) {
+    const [comments, setComments] = useState<Comment[]>([]); 
     const [commentText, setCommentText] = useState(""); 
 
     

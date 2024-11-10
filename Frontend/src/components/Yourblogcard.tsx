@@ -10,7 +10,7 @@ interface yourblogcardinterface{
 
 export default function Yourblogcard({blogpostid, title,type,img}:yourblogcardinterface){
     const handlePublish=async()=>{
-        const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/publish?id=${blogpostid}`,{})
+        await axios.post(`${import.meta.env.VITE_BACKEND_URL}/publish?id=${blogpostid}`,{})
         window.location.reload();
     }
 
