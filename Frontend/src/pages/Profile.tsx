@@ -1,21 +1,50 @@
+import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
+import axios from "axios";
 
 export default function Profile(){
+    const[image,setImage] = useState("");
+    const[username,setUsername] = useState("");
+    const[bio,setBio] = useState("");
+    const[email,setEmail] = useState("");
+    
+    
+    useEffect(()=>{
+        const profile = async()=> {
+            const token = localStorage.getItem("token");
+            const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/profile`,{
+                headers:{
+                    token:token
+                }
+            })
+            setImage(response.data.image);
+            setUsername(response.data.userinfo.username);
+            setBio(response.data.userinfo.bio);
+            setEmail(response.data.userinfo.email);
+        }
+        profile();
+    })
     return(
         <>
         <Navbar/>
         <div className="p-8">
-        <div className="">
+        <div>
+            <div className="flex justify-center">
             <img
-            className="p-20 avatar aspect-square rounded-full"
-            src="https://imgs.search.brave.com/-hXkFG6GVoSLQHeuuamFGSipXjSGbTDs-doqS7mT5WE/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9tYW5v/Zm1hbnkuY29tL3dw/LWNvbnRlbnQvdXBs/b2Fkcy8yMDIzLzA2/L0RpYW1vbmQuanBn"/>
-            <div className="text-white text-xl px-3">
+            className="md:w-1/4 md:h-1/4 avatar aspect-square rounded-full mb-10"
+            src={image}/>
+            
+
+            </div>
+            
+            
+        <div className="text-white text-xl px-3">
                 <div className="text-center">
-            <p className="text-3xl font-bold mb-2">Prajwal Somalkar</p>
+            <p className="text-3xl font-bold mb-2">{username}</p>
             <br/>
-            <p className="text-gray-400 mb-2">Passionate about web development and AI. Always learning, always coding</p>
+            <p className="text-gray-400 mb-2">{bio}</p>
             <br/>
-            <p className="text-gray-500">PrajwalSomalkar@gmail.com</p>
+            <p className="text-gray-500">{email}</p>
             <br/>
             </div>
             </div>
