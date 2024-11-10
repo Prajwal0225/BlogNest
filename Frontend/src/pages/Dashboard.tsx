@@ -4,9 +4,27 @@ import Blogsdivide from "../components/Blogsdivide";
 import Navbar from "../components/Navbar";
 import axios from "axios";
 
+interface BlogInfo {
+    likes: number;
+    comments: number;
+  }
+  
+  interface BlogPost {
+    id: number;
+    title: string;
+    blogimg: string;
+    blogpostinfo: BlogInfo[];
+  }
+  
+  interface Blog {
+    profileimg: string;
+    blogpost: BlogPost[];
+  }
+  
+ 
 
 export default function Dashboard(){
-    const [blogpost, setBlogPosts] = useState();
+    const [blogpost, setBlogPosts] = useState<Blog[] | null>(null);
 
     useEffect(()=>{
         const blogs = async()=> {

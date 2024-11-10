@@ -5,10 +5,16 @@ import Navbar from "../components/Navbar";
 import Yourblogcard from "../components/Yourblogcard";
 import axios from "axios";
 
+interface Blog {
+    id: number;
+    title: string;
+    blogimg: string;
+    publish: boolean;
+  }
 
 
 export default function Yourblogs(){
-    const [blogpost, setBlogPosts] = useState();
+    const [blogpost, setBlogPosts] = useState<Blog[]|null>(null);
 
     useEffect(()=>{
         const token = localStorage.getItem("token");
