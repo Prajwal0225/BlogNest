@@ -73,7 +73,7 @@ export default function Blogcard({id,blogerimg,blogtitle,blogimg,like,comments}:
                     </div>
                 </div>
                 <div className="text-2xl font-bold mb-3">{blogtitle}</div>
-                <div className='mb-5'><img src={blogimg} alt="" /></div>
+                <div className='mb-5'><img className='rounded-xl' src={blogimg} alt="" /></div>
             </Link>
             <div className='flex justify-between'>
                 <div>

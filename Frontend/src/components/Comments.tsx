@@ -21,7 +21,6 @@ export default function Comments({ image, blogpostId, userId }: CommentsSectionI
     const [comments, setComments] = useState<Comment[]>([]); 
     const [commentText, setCommentText] = useState(""); 
 
-    
     useEffect(() => {
         const fetchComments = async () => {
             try {
@@ -43,8 +42,13 @@ export default function Comments({ image, blogpostId, userId }: CommentsSectionI
                 userId,
             });
             if (response.data.message === "Comment added successfully") {
-                setCommentText(""); 
-                setComments(prevComments => [...prevComments, response.data.comment]);
+                try {
+                    const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/getcomments?id=${blogpostId}`);
+                    setComments(response.data.comments);
+                } catch (error) {
+                    console.error("Failed to fetch comments:", error);
+                }
+
             }
         } catch (error) {
             console.error("Failed to post comment:", error);

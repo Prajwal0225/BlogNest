@@ -17,13 +17,14 @@ export default function Profile(){
                     token:token
                 }
             })
+            console.log("I am profile");
             setImage(response.data.image);
             setUsername(response.data.userinfo.username);
             setBio(response.data.userinfo.bio);
             setEmail(response.data.userinfo.email);
         }
         profile();
-    })
+    },[]);
     return(
         <>
         <Navbar/>

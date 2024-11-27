@@ -22,6 +22,15 @@ export default function Writeblog(){
 
     const open = Boolean(anchorEl);
   
+    const getTransformedUrl = (url:string, width:number, height:number) => {
+      // Check if the URL contains the "/upload/" segment
+      const uploadIndex = url.indexOf("/upload/");
+      if (uploadIndex === -1) return url; // Return original URL if "/upload/" is not found
+  
+      // Insert the width and height transformation right after "/upload/"
+      const transformedUrl = `${url.slice(0, uploadIndex + 8)}w_${width},h_${height}/${url.slice(uploadIndex + 8)}`;
+      return transformedUrl;
+    };
   
 
 
@@ -70,7 +79,8 @@ export default function Writeblog(){
             const result = await response.data;
 
             if (response.status ==200) {
-                setUploadedImageUrl(result.result.secure_url); // Set uploaded image URL
+                const url = getTransformedUrl(result.result.secure_url,660,400)
+                setUploadedImageUrl(url); // Set uploaded image URL
                 alert("Image uploaded successfully!");
             } else {
                 console.error("Upload failed:", result);
@@ -219,9 +229,6 @@ export default function Writeblog(){
     </div>
 
     {uploadblogpost ? uploadblogpost:""}
-
-
-
         </div>
         </div>
         </>
