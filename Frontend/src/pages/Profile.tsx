@@ -1,41 +1,55 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import axios from "axios";
+import { Hourglass } from "react-loader-spinner";
 
 export default function Profile(){
     const[image,setImage] = useState("");
     const[username,setUsername] = useState("");
     const[bio,setBio] = useState("");
     const[email,setEmail] = useState("");
+    const[loading,setLoading] = useState(true);
     
     
     useEffect(()=>{
         const profile = async()=> {
+            setLoading(true);
             const token = localStorage.getItem("token");
             const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/profile`,{
                 headers:{
                     token:token
                 }
             })
-            console.log("I am profile");
             setImage(response.data.image);
             setUsername(response.data.userinfo.username);
             setBio(response.data.userinfo.bio);
             setEmail(response.data.userinfo.email);
+            setLoading(false);
         }
         profile();
     },[]);
     return(
         <>
         <Navbar/>
-        <div className="p-8">
+        {loading? <>
+        
+            <div className="w-full h-[100vh] flex items-center justify-center">
+<Hourglass
+  visible={true}
+  height="80"
+  width="80"
+  ariaLabel="hourglass-loading"
+  wrapperStyle={{}}
+  wrapperClass=""
+  colors={['#306cce', '#72a1ed']}
+  /> 
+  </div>:</>:<>
+        <div className="p-8 flex h-[100vh] items-center justify-center">
         <div>
             <div className="flex justify-center">
             <img
-            className="md:w-1/4 md:h-1/4 avatar aspect-square rounded-full mb-10"
+            className=" w-[50vh] h-[50vh] avatar aspect-square rounded-full mb-10"
             src={image}/>
-            
-
             </div>
             
             
@@ -51,6 +65,8 @@ export default function Profile(){
             </div>
         </div>
         </div>
+        </>
+}
         </>
     )
 }

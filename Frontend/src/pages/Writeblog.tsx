@@ -3,7 +3,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import UploadIcon from '@mui/icons-material/Upload';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -16,6 +16,7 @@ export default function Writeblog(){
     const [blogheading,setBlogHeading] = useState("");
     const [blogpost,setBlogPost]=useState("");
     const [uploadblogpost,setUploadBlogPost] = useState("");
+    const [imageUpload,setImageUpload] = useState(false);
     
     const navigate = useNavigate();
     const backendurl = import.meta.env.VITE_BACKEND_URL;
@@ -48,20 +49,24 @@ export default function Writeblog(){
         handleClose(); 
       };
 
+      useEffect(() => {
+            handleUpload();
+    }, [file]);
+
 
       const handleFileChange = (e:any) => {
         const selectedFile = e.target.files[0];
-        console.log(selectedFile);
         if (selectedFile) {
             setFile(selectedFile);
             setFilename(selectedFile.name);
         }
     };
 
+    
+
 
     const handleUpload = async () => {
         if (!file) {
-            alert("Please select an image to upload");
             return;
         }
 
@@ -81,6 +86,7 @@ export default function Writeblog(){
             if (response.status ==200) {
                 const url = getTransformedUrl(result.result.secure_url,660,400)
                 setUploadedImageUrl(url); // Set uploaded image URL
+                setImageUpload(true);
                 alert("Image uploaded successfully!");
             } else {
                 console.error("Upload failed:", result);
@@ -126,9 +132,15 @@ export default function Writeblog(){
     return(
         <>
         <Navbar/>
-        
-<div className="flex flex-col items-center p-5 md:px-20">
-    
+
+{imageUpload ? <>
+  <div className=" px-5 py-5 md:px-20 md:py-5 lg:px-[25%] ">
+      <div className= "flex justify-center w-[100%]">
+      <img className="rounded-xl w-[100%]" src={uploadedImageUrl}/>
+      </div>
+      </div>
+      </>:<>
+<div className="px-5 py-5 md:px-20 md:py-5 lg:px-[25%] mt-10">
     <input
         id="file-upload"
         type="file"
@@ -150,19 +162,10 @@ export default function Writeblog(){
 
     </div>
     </div>
-     <button
-            className="text-white w-full border border-customGrayLight p-2.5 mt-2 bg-gray-500 hover:bg-gray-400 rounded-xl"
-            onClick={handleUpload}
-        >
-        Upload Photo
-        </button>
-</div>
-
-       
+</div></>}
 
 
-
-        <div className="p-5 md:px-20">
+        <div className="p-5 md:px-20 md:py-5 lg:px-[25%]">
             <div>
                 <input 
                 onChange={(e)=>setBlogHeading(e.target.value)}
@@ -227,6 +230,7 @@ export default function Writeblog(){
         <button onClick= {()=>handleblogpost(false)} className="bg-gray-700 hover:bg-gray-800 py-4 px-2 rounded-xl font-bold">Save as draft</button>
         <button onClick={()=>handleblogpost(true)} className="bg-green-600 hover:bg-green-700 py-4 px-2 rounded-xl font-bold">Published</button>
     </div>
+    
 
     {uploadblogpost ? uploadblogpost:""}
         </div>

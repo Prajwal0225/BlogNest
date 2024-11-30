@@ -3,6 +3,7 @@ import Blogcard from "../components/Blogcard";
 import Blogsdivide from "../components/Blogsdivide";
 import Navbar from "../components/Navbar";
 import axios from "axios";
+import { Hourglass } from "react-loader-spinner";
 
 interface BlogInfo {
     likes: number;
@@ -25,11 +26,14 @@ interface BlogInfo {
 
 export default function Dashboard(){
     const [blogpost, setBlogPosts] = useState<Blog[] | null>(null);
-
+    const [loading,setLoading] = useState<Boolean>(true);
+    
     useEffect(()=>{
         const blogs = async()=> {
+            setLoading(true);
             const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/allblogpost`)
             setBlogPosts(response.data.allblogsinfo);
+            setLoading(false);
         }
         blogs();
     },[])
@@ -37,8 +41,20 @@ export default function Dashboard(){
     return (
         <>
         <Navbar/>
-        
         <Blogsdivide focus="allblogs"/>
+        {loading ? 
+        <div className="w-full h-[100vh] flex items-center justify-center">
+<Hourglass
+  visible={true}
+  height="80"
+  width="80"
+  ariaLabel="hourglass-loading"
+  wrapperStyle={{}}
+  wrapperClass=""
+  colors={['#306cce', '#72a1ed']}
+  /> 
+  </div>:<>
+        
         <div className="md:grid md:grid-cols-2 lg:grid-cols-4 md:ml-10 md:mr-10 lg:ml-20 lg:mr-20">
             
         {blogpost ? blogpost.map((blog: any) => (
@@ -57,6 +73,8 @@ export default function Dashboard(){
     ))
 )) : ""}      
         </div>
+        </>
+}
         </>
     )
 }

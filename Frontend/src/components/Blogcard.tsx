@@ -31,7 +31,6 @@ export default function Blogcard({id,blogerimg,blogtitle,blogimg,like,comments}:
                     }
                 }
             );
-            console.log(response);
             if(response.data.message === "like successful") {
                 setIsLike(true);
                 setLikeCount(prev => prev + 1);
@@ -67,12 +66,12 @@ export default function Blogcard({id,blogerimg,blogtitle,blogimg,like,comments}:
     return (
         <div className="text-white m-8 p-5 border bg-customGrayLight rounded-xl hover:border-blue-400 transition-all duration-300 shadow-lg hover:shadow-blue-400/20">
             <Link to={`/blog/${id}`}>
-                <div className="flex items-center gap-5 font-semibold mb-5">
+                <div className="flex items-center gap-5 font-semibold mb-4">
                     <div>
                         <img className="w-12 h-12 md:w-16 md:h-16 lg:w-14 lg:h-14 rounded-full" src={blogerimg} />
                     </div>
                 </div>
-                <div className="text-2xl font-bold mb-3">{blogtitle}</div>
+                <div className="text-xl line-clamp-2 min-h-[3.5rem] font-bold mb-3">{blogtitle}</div>
                 <div className='mb-5'><img className='rounded-xl' src={blogimg} alt="" /></div>
             </Link>
             <div className='flex justify-between'>

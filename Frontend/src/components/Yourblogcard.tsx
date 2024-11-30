@@ -19,7 +19,7 @@ export default function Yourblogcard({blogpostid, title,type,img}:yourblogcardin
     return(
         <>
         <div className="text-white m-8 p-5 border bg-customGrayLight rounded-xl hover:border-blue-400 transition-all duration-300 shadow-lg hover:shadow-blue-400/20">
-            <div className="text-2xl font-bold mb-3">{title}</div>
+            <div className="text-xl font-bold mb-3 line-clamp-2 min-h-[3.5rem]">{title}</div>
             <div className='mb-5'><img className="rounded-xl" src={img} alt="" /></div>
             {type == "published" ? <button className={`bg-green-600 px-2 py-1 rounded-full mb-5`}>{type}</button>: <button className={`bg-yellow-600 px-2 py-1 rounded-full mb-5`}>{type}</button>}
             <br/>

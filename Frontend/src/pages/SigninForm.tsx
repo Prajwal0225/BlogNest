@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Formbox from "../components/Forms/Formbox";
 import FormHeading from "../components/Forms/Formheading";
 import InputField from "../components/Forms/InputField";
@@ -6,6 +6,7 @@ import Formbutton from "../components/Forms/Formbutton";
 import Formbottom from "../components/Forms/Formbottom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import UploadIcon from '@mui/icons-material/Upload';
 
 
 export default function SigninForm(){
@@ -22,6 +23,10 @@ export default function SigninForm(){
 
 
     const backendurl = import.meta.env.VITE_BACKEND_URL;
+
+    useEffect(()=>{
+        handleUpload();
+    },[file]);
 
 
     const handleSignin = async() =>{
@@ -76,7 +81,6 @@ export default function SigninForm(){
 
     const handleUpload = async () => {
         if (!file) {
-            alert("Please select an image to upload");
             return;
         }
 
@@ -117,6 +121,16 @@ export default function SigninForm(){
         <FormHeading
         heading="Signin For BlogNest"/>
 
+{uploadedImageUrl && (
+            <div className="flex justify-center">
+            <img
+                src={uploadedImageUrl}
+                alt="Uploaded profile"
+                className="mt-4 w-[20vh] h-[20vh] rounded-full"
+            />
+            </div>
+        )}
+
         <InputField
         type="text"
         onChange={(e:any)=>setUsername(e.target.value)}
@@ -149,30 +163,29 @@ export default function SigninForm(){
         inputplaceholder="Confirm your password"/>
 
        
-        <label className="text-white font-bold">Profile Photo</label>
-        <br/>
-        <input
-            type="file"
-            accept="image/*"
-            className="text-white w-full border border-customGrayLight p-2.5 mt-2 bg-customGrayLight rounded-xl"
-            onChange={handleFileChange}
-        />
-        <button
-            className="text-white w-full border border-customGrayLight p-2.5 mt-2 bg-customGrayLight rounded-xl"
-            onClick={handleUpload}
-        >
-        Upload Photo
-        </button>
 
-        {uploadedImageUrl && (
-            <div className="flex justify-center">
-            <img
-                src={uploadedImageUrl}
-                alt="Uploaded profile"
-                className="mt-4 w-24 h-24 rounded-full object-cover"
-            />
-            </div>
-        )}
+        <label className="text-white font-bold">Profile Picture</label>
+        <div className="text-center">
+        
+    <input
+        id="file-upload"
+        type="file"
+        accept="image/*"
+        className="hidden"
+        onChange={handleFileChange}
+    />
+    <div className="text-white border border-customGrayLight p-2.5 mt-2 bg-customGrayLight rounded-xl">
+    <div>
+    <label
+        htmlFor="file-upload"
+        className="cursor-pointer"
+    >
+      {uploadedImageUrl =="" ? <><UploadIcon className="mr-3" fontSize="small"/>Upload Photo </>:<p>Uploaded</p>}
+    </label>
+    </div>
+    </div>
+</div>
+
 
         <p className="text-xl text-red-500 font-bold text-center">{invalidinput}</p>
 
