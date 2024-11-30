@@ -13,8 +13,6 @@ const[password,setPassword] = useState("");
 const navigate = useNavigate();
 
 const handleLogin = async() =>{
-        console.log(username);
-        console.log(password);
         const user = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/login`,
             {
             username,

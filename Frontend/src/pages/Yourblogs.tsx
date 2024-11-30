@@ -18,7 +18,6 @@ export default function Yourblogs(){
     const [blogpost, setBlogPosts] = useState<Blog[]|null>(null);
     const [loading,setLoading] = useState<Boolean>(true);
     useEffect(()=>{
-        console.log("I am actually running");
         setLoading(true);
         const token = localStorage.getItem("token");
         const blogs = async()=> {

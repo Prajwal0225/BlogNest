@@ -9,6 +9,7 @@ import Profile from './pages/Profile'
 import Blog from './pages/Blog'
 import { useEffect, useState } from 'react'
 import BloggerProfile from './pages/BloggerProfile'
+import Yourblog from './pages/Yourblog'
 
 function App() {
   const[token,setToken]=useState(false);
@@ -37,8 +38,7 @@ function App() {
       <Route path='/writeblog' element={<Writeblog/>}/>
       <Route path='/profile' element={<Profile/>}/>
       <Route path='/profile/:blogger' element={<BloggerProfile/>}/>
-      
-      
+      <Route path='/yourblog/:id' element={<Yourblog/>}/>
     </Routes>
     </BrowserRouter>
     </>

@@ -53,7 +53,6 @@ export default function SigninForm(){
             return;
         }
 
-        console.log(response.data);
         localStorage.setItem("token",response.data.token);
         navigate('/dashboard')
     }
@@ -100,7 +99,6 @@ export default function SigninForm(){
             if (response.status ==200) {
                 const url = getTransformedUrl(result.result.secure_url,600,600)
                 setUploadedImageUrl(url); // Set uploaded image URL
-                console.log("newurl",uploadedImageUrl);
                 alert("Image uploaded successfully!");
             } else {
                 console.error("Upload failed:", result);
