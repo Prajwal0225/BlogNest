@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import { Hourglass } from "react-loader-spinner";
 
 export default function Yourblog(){
     const {id} = useParams();
@@ -14,6 +15,7 @@ export default function Yourblog(){
     const [blogpost,setBlogPost]=useState("");
     const [uploadblogpost,setUploadBlogPost] = useState("");
     const [blogimage,setBlogImage] = useState("");
+    const [loading,setLoading] = useState(true);
     const navigate = useNavigate();
     
     
@@ -66,11 +68,13 @@ export default function Yourblog(){
     
     useEffect(()=>{
         const getData = async() =>{
+            setLoading(true);
             const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/blog?id=${id}`);
             setBlogPost(response.data.blogpost.description);
             setBlogHeading(response.data.blogpost.title);
             setBlogImage(response.data.blogpost.blogimg);
             setSelectedCategory(response.data.blogpost.category);
+            setLoading(false);
        }
        getData();
     },[])
@@ -83,13 +87,24 @@ export default function Yourblog(){
 
 <>
 <Navbar/>
+
+{loading ? <div className="w-full h-[100vh] flex items-center justify-center">
+<Hourglass
+  visible={true}
+  height="80"
+  width="80"
+  ariaLabel="hourglass-loading"
+  wrapperStyle={{}}
+  wrapperClass=""
+  colors={['#306cce', '#72a1ed']}
+  /> 
+  </div>: <>
   <div className=" px-5 py-5 md:px-20 md:py-5 lg:px-[25%] ">
       <div className= "flex justify-center w-[100%]">
       <img className="rounded-xl w-[100%]" src={blogimage}/>
       </div>
       </div>
     
-
 
         <div className="p-5 md:px-20 md:py-5 lg:px-[25%]">
             <div>
@@ -164,6 +179,8 @@ export default function Yourblog(){
     {uploadblogpost ? uploadblogpost:""}
         </div>
         </div>
+        </>
+}
         </>
     )
 }
