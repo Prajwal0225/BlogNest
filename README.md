@@ -8,14 +8,14 @@ BlogNext is a feature-rich blogging website designed to provide users with an in
 
 ### User Authentication  
 - **Sign-Up**: Create an account with an upload a profile picture.
-
-  ![Screenshot from 2024-12-01 11-32-00](https://github.com/user-attachments/assets/27693db1-5d9a-4556-8cbd-2c13ccad7ad8)
-
+  
+  ![image](https://github.com/user-attachments/assets/78fc0d49-bbfd-4134-a91e-97cf4dc70684)
+  ![image](https://github.com/user-attachments/assets/ec0f524f-1af9-435d-bdd6-b77d79d97cf6)
 
 - **Login**: Secure login functionality using JWT (JSON Web Token) for automatic session management.
-
-  ![Screenshot from 2024-12-01 11-33-26](https://github.com/user-attachments/assets/a5b59580-053c-49fc-b1c5-28164fa264ae)
   
+  ![image](https://github.com/user-attachments/assets/e6d8c0e7-a0cf-4d7a-903c-7ed4e5c51602)
+
 
 ### Blog Management  
 - **Create Blog Posts**: Write and upload blog posts with an option to include a header image.
@@ -33,8 +33,10 @@ BlogNext is a feature-rich blogging website designed to provide users with an in
 ### Home Page  
 - **Your Blogs**:  
   - View all blog posts you have created, including drafts and published blogs.
+    
      ![Screenshot from 2024-12-01 11-40-16](https://github.com/user-attachments/assets/32e4c57f-5ee3-420a-b9aa-b721d962313d)
   - Publish drafts directly from the dashboard.
+    
     ![image](https://github.com/user-attachments/assets/92927949-d2c4-4e05-9d80-5ae166d24053)
   - You can delete your blogpost also.
 
@@ -43,8 +45,10 @@ BlogNext is a feature-rich blogging website designed to provide users with an in
 
 - **All Blogs**:  
   - View all published blogs from every user.
+    
     ![image](https://github.com/user-attachments/assets/b363a778-00ce-41de-8958-288342be4151)
   - Like Blogs : Engage with blog posts by liking them.
+    
     ![image](https://github.com/user-attachments/assets/5df3eefd-847a-48a2-a4f8-4d6badd764b9)
 
   
@@ -52,9 +56,11 @@ BlogNext is a feature-rich blogging website designed to provide users with an in
 ### Blog Interaction  
  
 - **View Blogs**: Read full blog posts with the author’s profile and details displayed.
+  
   ![blog-nest-lilac vercel app-BlogNext](https://github.com/user-attachments/assets/e8414bbf-8ba3-4129-8a39-5377ac4de38b)
   
 - **Comments**: Add comments to blog posts and interact with other readers.
+  
   ![image](https://github.com/user-attachments/assets/b21e6ff7-966f-41fa-a501-71f0735af229)
   ![image](https://github.com/user-attachments/assets/9461a90b-9145-432b-8ce4-5b5c38229539)
 
@@ -71,3 +77,4 @@ BlogNext is a feature-rich blogging website designed to provide users with an in
 - **Database**: PostgreSQL (managed via Prisma ORM)  
 - **Image Storage**: Cloudinary  
 
+---
